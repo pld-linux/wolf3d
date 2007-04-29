@@ -1,0 +1,47 @@
+--- wolf3d-20011028/Makefile.orig	2001-09-28 01:58:29.000000000 +0200
++++ wolf3d-20011028/Makefile	2007-04-29 11:45:34.804272646 +0200
+@@ -19,16 +19,16 @@ DOBJS = $(OBJS) $(ROBJS) vi_sdl.o
+ 
+ LFLAGS = -lm
+ 
+-OBJS += sd_null.o
+-#OBJS += sd_oss.o fmopl.o
++#OBJS += sd_null.o
++OBJS += sd_oss.o fmopl.o
+ #CFLAGS += -D_REENTRANT
+ #LFLAGS += -lpthread
+ 
+ CFLAGS += `sdl-config --cflags`
+ 
+ SLFLAGS = $(LFLAGS) -lvga
+-XLFLAGS = $(LFLAGS) -L/usr/X11R6/lib -lX11 -lXext
+-DLFLAGS = $(LFLAGS) `sdl-config --libs` -L/usr/X11R6/lib -lX11 -lXext
++XLFLAGS = $(LFLAGS) -lX11 -lXext
++DLFLAGS = $(LFLAGS) `sdl-config --libs`
+ 
+ NASM = nasm
+ 
+--- wolf3d-20011028/sd_oss.c.orig	2001-03-19 04:00:29.000000000 +0100
++++ wolf3d-20011028/sd_oss.c	2007-04-29 11:46:35.711743565 +0200
+@@ -39,7 +39,8 @@
+ 
+ boolean AdLibPresent, SoundBlasterPresent;
+ 	
+-SDMode SoundMode, MusicMode;
++SDMode SoundMode;
++SMMode MusicMode;
+ SDSMode DigiMode;
+ 
+ static volatile boolean sqActive;
+--- wolf3d-20011028/sd_null.c.orig	2001-03-19 04:00:29.000000000 +0100
++++ wolf3d-20011028/sd_null.c	2007-04-29 11:46:45.724314149 +0200
+@@ -2,7 +2,8 @@
+ 
+ boolean AdLibPresent, SoundBlasterPresent;
+ 
+-SDMode SoundMode, MusicMode;
++SDMode SoundMode;
++SMMode MusicMode;
+ SDSMode DigiMode;
+ 
+ static boolean SD_Started;
